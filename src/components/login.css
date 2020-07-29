@@ -1,0 +1,10 @@
+.login-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 15px;
+    justify-content: center;
+}
+
+.login-textfield {
+    width: 300px;
+}
