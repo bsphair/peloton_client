@@ -4,11 +4,13 @@ import TextField from '@material-ui/core/TextField';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import {
+  // loginFailureMessage,
   userLogin,
 } from 'components/loginSlice';
 import 'components/login.css';
 
 const Login = () => {
+  const failureMessage = useSelector(state => state.general.loginMessage);
   const dispatch = useDispatch();
 
   const [userName, setUserName] = useState('');
@@ -28,6 +30,7 @@ const Login = () => {
 
       <div>
         <TextField
+          error={Boolean(failureMessage)}
           id="login-username-textfield"
           className="login-textfield"
           label="Username"
@@ -39,6 +42,7 @@ const Login = () => {
 
       <div>
         <TextField
+          error={Boolean(failureMessage)}
           id="login-password-textfield"
           className="login-textfield"
           label="Password"
@@ -58,6 +62,8 @@ const Login = () => {
           Submit
         </Button>
       </div>
+
+      {failureMessage && <div>{failureMessage}</div>}
 
     </div>
   );
