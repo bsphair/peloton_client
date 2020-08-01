@@ -1,17 +1,12 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import {
   userLogin,
 } from 'components/loginSlice';
 import 'components/login.css';
-
-const propTypes = {
-
-};
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -68,5 +63,4 @@ const Login = () => {
   );
 };
 
-Login.propTypes = propTypes;
 export default Login;

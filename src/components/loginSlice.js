@@ -3,10 +3,45 @@ import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const loginSlice = createSlice({
-  name: 'login',
+  name: 'generalInformation',
   initialState: {
-    userName: '',
-    password: '',
+    id: '',
+    imageURL: '',
+    authenticatedFitbit: false,
+    authenticatedStrava: false,
+    lastWorkoutDate: 0,
+    profileCreated: 0,
+    totalFollowers: 0,
+    totalFollowing: 0,
+    workoutMetrics: {
+      totalNonPedalingWorkouts: 0,
+      totalPedalingWorkouts: 0,
+      totalWorkouts: 0,
+      running: { count: 0 },
+      walking: { count: 0 },
+      strength: { count: 0 },
+      meditation: { count: 0 },
+      bootcamp: { count: 0 },
+      stretching: { count: 0 },
+      cardio: { count: 0 },
+      yoga: { count: 0 },
+      cycling: { count: 0 },
+    },
+    credentials: {
+      userName: '',
+      password: '',
+      userId: '',
+    },
+    loginStatus: 0,
+    loginMessage: '',
+    userInfo: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      height: 0,
+      weight: 0,
+      location: '',
+    }
   },
   reducers: {
     setUserCredentials: (state, action) => {
@@ -29,11 +64,11 @@ export const userLogin = (username, password) => async dispatch => {
     }
   })
     .catch(error => {
-      console.log(error);
+      console.log(`Error: ${error}`);
     })
     .then(res => {
-      console.log(res);
       console.log(JSON.parse(res.data));
+      const jsonData = JSON.parse(res.data);
     });
 };
 
