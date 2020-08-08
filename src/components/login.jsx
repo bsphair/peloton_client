@@ -3,15 +3,17 @@ import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
-import {
-  // loginFailureMessage,
-  userLogin,
-} from 'components/loginSlice';
+import { userLogin } from 'components/loginSlice';
 import 'components/login.css';
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
-  const failureMessage = useSelector(state => state.general.loginMessage);
+  const generalState = useSelector(state => state.general);
   const dispatch = useDispatch();
+
+  const {
+    loginMessage,
+  } = generalState;
 
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -21,6 +23,15 @@ const Login = () => {
       dispatch(userLogin(userName, password));
     }
   };
+  let history = useHistory();
+
+  useEffect(() => {
+    if (generalState.loginSuccessful) {
+      history.replace("/home");
+    } else {
+      history.replace("/");
+    }
+  }, [generalState.loginSuccessful]);
 
   return (
     <div className="login-container">
@@ -30,7 +41,7 @@ const Login = () => {
 
       <div>
         <TextField
-          error={Boolean(failureMessage)}
+          error={Boolean(loginMessage)}
           id="login-username-textfield"
           className="login-textfield"
           label="Username"
@@ -42,7 +53,7 @@ const Login = () => {
 
       <div>
         <TextField
-          error={Boolean(failureMessage)}
+          error={Boolean(loginMessage)}
           id="login-password-textfield"
           className="login-textfield"
           label="Password"
@@ -53,6 +64,8 @@ const Login = () => {
         />
       </div>
 
+      {loginMessage && <div>{loginMessage}</div>}
+
       <div>
         <Button
           variant="contained"
@@ -62,8 +75,6 @@ const Login = () => {
           Submit
         </Button>
       </div>
-
-      {failureMessage && <div>{failureMessage}</div>}
 
     </div>
   );

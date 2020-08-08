@@ -33,6 +33,7 @@ export const loginSlice = createSlice({
       userId: '',
     },
     loginMessage: '',
+    loginSuccessful: false,
     userInfo: {
       firstName: '',
       lastName: '',
@@ -48,7 +49,10 @@ export const loginSlice = createSlice({
       state.password = action.payload.password;
     },
     loginFailed: (state, action) => {
-      state.loginMessage = action.payload;
+      const { payload } = action;
+      const { loginMessage } = payload;
+      state.loginMessage = loginMessage;
+      state.loginSuccessful = false;
     },
     loginSuccessful: (state, action) => {
       const { payload } = action;
@@ -57,6 +61,7 @@ export const loginSlice = createSlice({
         authenticatedFitbit,
         authenticatedStrava,
         loginMessage,
+        loginSuccessful,
         lastWorkoutDate,
         profileCreated,
         totalFollowers,
@@ -75,6 +80,7 @@ export const loginSlice = createSlice({
       state.totalFollowing = totalFollowing;
       state.workoutMetrics = workoutMetrics;
       state.userInfo = userInfo;
+      state.loginSuccessful = loginSuccessful;
     },
   },
 });
@@ -106,10 +112,11 @@ export const userLogin = (username, password) => async dispatch => {
       const errorMessage = jsonData?.message;
 
       if (errorMessage) {
-        dispatch(loginFailed(errorMessage));
+        dispatch(loginFailed({
+          loginMessage: errorMessage,
+        }));
       } else {
         const { user_data } = jsonData;
-        console.log(user_data);
         const {
           id,
           is_fitbit_authenticated,
@@ -135,6 +142,7 @@ export const userLogin = (username, password) => async dispatch => {
           authenticatedFitbit: is_fitbit_authenticated,
           authenticatedStrava: is_strava_authenticated,
           loginMessage: '',
+          loginSuccessful: true,
           lastWorkoutDate: last_workout_at,
           profileCreated: created_at,
           totalFollowers: total_followers,
