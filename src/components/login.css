@@ -1,10 +1,39 @@
 .login-container {
     display: grid;
+    grid-template-columns: 40% 60%;
+}
+
+.login-login-section {
+    grid-column: 1;
+    align-self: center;
+    justify-self: center;
+    display: grid;
     grid-template-columns: 1fr;
-    row-gap: 15px;
-    justify-content: center;
+    row-gap: 25px;
+    padding: 50px;
+}
+
+.login-login-section-header-section {
+    width: 300px;
+}
+
+.login-login-section-header-section p {
+    margin: 20px 0 20px 0;
+}
+
+.login-login-section-submit-button {
+    justify-self: center;
 }
 
 .login-textfield {
     width: 300px;
+}
+
+.login-preview-section {
+    grid-column: 2;
+}
+
+.login-preview-section img {
+    height: 100%;
+    width: 100%;
 }

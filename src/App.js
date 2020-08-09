@@ -19,7 +19,7 @@ import './App.css';
 
 const PrivateRoute = ({ children, ...rest }) => {
   const isAuthenticated = useSelector(state => state.general.loginSuccessful);
-  console.log(isAuthenticated);
+
   return (
     <Route
       {...rest}
@@ -45,12 +45,15 @@ const App = () => {
       {/*<Login />*/}
       <Router>
         <Switch>
+          <Route exact path="/home">
+            <Home />
+          </Route>
           <Route exact path="/">
             <Login />
           </Route>
-          <PrivateRoute exact path="/home">
-            <Home />
-          </PrivateRoute>
+          {/*<PrivateRoute exact path="/home">*/}
+          {/*  <Home />*/}
+          {/*</PrivateRoute>*/}
         </Switch>
       </Router>
     </div>
