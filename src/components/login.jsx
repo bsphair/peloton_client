@@ -8,6 +8,12 @@ import 'components/login.css';
 import { useHistory } from "react-router-dom";
 import GymImage from 'images/gymImage.jpg';
 import Paper from '@material-ui/core/Paper';
+import Styled from 'styled-components';
+import {
+  ThemeProvider,
+  createMuiTheme,
+} from '@material-ui/core/styles';
+
 
 const Login = () => {
   const generalState = useSelector(state => state.general);
@@ -27,6 +33,14 @@ const Login = () => {
   };
   let history = useHistory();
 
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: '#0288d1',
+      },
+    },
+  });
+
   // useEffect(() => {
   //   if (generalState.loginSuccessful) {
   //     history.replace("/home");
@@ -41,10 +55,11 @@ const Login = () => {
       <div className="login-login-section">
         <div className="login-login-section-header-section">
           <h1>Peloton Dashboard</h1>
-          <p>A dashboard to display Peloton workout statistics.</p>
+          <p>A dashboard to display your Peloton workout statistics.</p>
         </div>
 
-        <div>
+
+        <ThemeProvider theme={theme}>
           <TextField
             error={Boolean(loginMessage)}
             id="login-username-textfield"
@@ -54,9 +69,9 @@ const Login = () => {
             value={userName}
             onChange={event => setUserName(event.target.value)}
           />
-        </div>
+        </ThemeProvider>
 
-        <div>
+        <ThemeProvider theme={theme}>
           <TextField
             error={Boolean(loginMessage)}
             id="login-password-textfield"
@@ -67,7 +82,7 @@ const Login = () => {
             type="password"
             onChange={event => setPassword(event.target.value)}
           />
-        </div>
+        </ThemeProvider>
 
         {loginMessage && <div>{loginMessage}</div>}
 
@@ -77,7 +92,7 @@ const Login = () => {
             color="primary"
             onClick={() => handleSubmit()}
           >
-            Submit
+            Login
           </Button>
         </div>
       </div>

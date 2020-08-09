@@ -1,6 +1,7 @@
 .login-container {
     display: grid;
     grid-template-columns: 40% 60%;
+    overflow: no-content;
 }
 
 .login-login-section {
@@ -25,6 +26,15 @@
     justify-self: center;
 }
 
+.login-login-section-submit-button Button {
+    width: 150px;
+    background-color: #039be5;
+}
+
+.login-login-section-submit-button Button:hover {
+    background-color: #0277bd;
+}
+
 .login-textfield {
     width: 300px;
 }
@@ -36,4 +46,8 @@
 .login-preview-section img {
     height: 100%;
     width: 100%;
+    
+    -webkit-box-shadow: 4px 0px 13px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 0px 13px 0px rgba(0,0,0,0.75);
+    box-shadow: 4px 0px 13px 0px rgba(0,0,0,0.75);
 }
